@@ -1,0 +1,76 @@
+<project xmlns="http://maven1.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>NyARToolKit</groupId>
+	<artifactId>NyARToolKit</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<packaging>jar</packaging>
+		
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		        
+        <appName>NyARToolKit</appName>
+        
+	</properties>
+	
+	<build>
+		<sourceDirectory>src, src.markersystem</sourceDirectory>
+		<resources>
+				
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+				
+			<resource>
+				<directory>src.markersystem</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+				
+			<resource>
+				<directory>bin</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+							
+		</resources>
+		
+		<plugins>
+		
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>			
+											 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+												
+					<archive>						
+					</archive>	
+					
+					<finalName>${appName}-${version}</finalName>
+					
+			        <descriptorRefs>
+			          <descriptorRef>jar-with-dependencies</descriptorRef>
+			        </descriptorRefs>	
+						
+				</configuration>
+			</plugin>
+			
+		</plugins>
+	</build>
+	
+</project>
