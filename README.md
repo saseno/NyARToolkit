@@ -1,4 +1,4 @@
-[English here!](README.EN.md "")
+[Japanese here!](README.ja.md "")
 
 # NyARToolkit for Java
 
@@ -12,118 +12,125 @@ wm(at)nyatla.jp
 
 ## NyARToolkit for Java
 
-* NyARToolkitは、ARToolKit 5.3.2を基盤としたARアプリケーション向けのクラスライブラリです。  
-ARToolKitについては、下記のURLをご覧ください。   
+* NyARToolkit is a class library for Augmented Reality (AR) application based on the ARToolkit5.2.3.
+* Compatible with J2SE7.0 and above.
+* Composed of basic features of ARToolkit, NyARToolkit's orginal features and framework.
+* Consisting of three modules: an independent "lib" module, an environment-dependent "utils" module, and a "sample" module that can package sample applications.
+* The lib module only work under J2ME API environment.
+* The util module provides controls for camera, 3D system, and helper class for interfacing external modules.
+* The sample module is a collection of AR applications, with a minimal amout of features.
+ 
+For more info on ARToolkit, please visit the following URL  
 http://www.hitl.washington.edu/artoolkit/
-* ネイティブコードを含まない純粋なJava言語のみで実装されています。J2SE7.0以上に対応しています。
-* ARToolKitマーカ、NyIdマーカ、NFTマーカ(ARToolkit5互換)の3種類のターゲットを扱えます。
-* ARToolKitの基本機能と、NyARToolKitオリジナルの拡張機能、フレームワークで構成しています。
-* ライブラリは3部構成です。
- ** lib - コアライブラリを含む基幹部品です。J2MEのAPIのみで動作します。環境依存性がありません。
- ** utils - カメラ制御、3Dシステム制御等のヘルパークラスを提供します。環境依存性があります。
- ** sample - 最低限の機能を持つ、ARアプリケーション集です。
+
+## NyARToolkit Features
+* Support multiple image inputs (BufferedImage, JMF output, binary input, and so on)
+* Enhanced reusability compared to ARToolkit
+* High-speed capabilities are available for following calculation: labeling, posture optimization, image processing, matrix operation, equation resolution
+* Support AR-Marker/NyID-style ID marker/NFT marker.
+* A MarkerSystem class that makes easy multiple uses of AR/NyID/NFT markers.
+* A simple sketching system for OpenGL
+* API for changing image format to and from BufferedImage.
+* Possible to use PNG image as markers, and to cut out parts of captured image.
 
 
-## 必要なライブラリ
-NyARToolkitの使用する外部ライブラリは以下の通りです。新しいバージョンのものがあれば、そちらを使用してください。
 
+## External Libraries
 
-1. Webcam Capture in Java (NyARToolKit/4.2.1以降ではリポジトリに含まれています。)  
-utils.jmf,sample.joglの実行に必要です。  
-URL: http://www.webcam-capture.sarxos.pl/  
+NyARToolkit uses the following external libraries. If newer version becomes available, please install the newer version.
 
-2. Jogl2(NyARToolKit/5.0.4以降ではリポジトリに含まれています。)  
-utils.jogl,sample.joglの実行に必要です。  
+1. Webcam Capture  
+General Webcam capture library. This is included.  
+http://webcam-capture.sarxos.pl/
+
+2. Jogl2  
+Required for running utils.jogl, sample.jogl. This is partially included.  
 URL:http://jogamp.org/deployment/jogamp-current/archive/  
-file:jogamp-all-platforms.7z  
+file:jogamp-all-platforms.7z
 
+Following libraries are optional.
 
-以下の物は必要に応じてそろえてください。
-
-1. JMF JavaTM Media Framework 2.1.1e
-utils.jmf,sample.joglの実行に必要です。  
+1. JMF JavaTM Media Framework 2.1.1e  
+Required for running utils.jmf, sample.jogl  
 URL: http://www.oracle.com/technetwork/java/javase/download-142937.html
 
 2. QuickTime 7.5  
-utils.qtの実行に必要です。
+Required for running utils.qt  
 URL: http://www.apple.com/quicktime/qtjava/
 
 3. java3d  
-utils.java3d,sample.java3dの実行に必要です。  
+Required for running utils.java3d, sample.java3d  
 URL: https://java3d.dev.java.net/binary-builds.html  
-file:    java3d-1_5_1-xxxx-i586.exe
+file:java3d-1_5_1-xxxx-i586.exe
 
-4. Jogl(NyARToolKit/4.2.1以降ではリポジトリに含まれています。)  
-utils.jogl,sample.joglの実行に必要です。  
-URL: https://jogamp.org/  
-file   : gluegen-old-1.0b6,jogl-old-1.1.1
-
-
+4. Jogl1  
+Required for running utils.jogl, sample.jogl  
+URL: http://download.java.net/media/jogl/builds/archive/  
+file: jogl-1.1.1-rc8-xxxx-xxx.zip 
 
 
+ Getting Started
+----------------------------------------------------------------------
+
+This section provides instruction for installing NyARToolkit development 
+tools under Eclipse environment.
+
+1. Create a new workspace/project in Eclipse.
+2. Import lib, utils, and sample modules (directories) into the workspace/project
+3. Correct the errors found at the imported project. Common errors include inconsistent character codes, or reference misses to external JAR files .  
+	The error of inconsistent character codes can be resolved by changing the project's encoding to UTF-8.  
+	For resolving reference misses to external JAR libraries, please refer to the chapter of external library.
+4. Connect webcam to PC.
+5. Run [WebcamCapture.java](https://github.com/nyatla/NyARToolkit/blob/master/sample/jogl/src/jp/nyatla/nyartoolkit/jogl/sample/sketch/webcamcapture/WebCamSample.java) within NyARToolkit.sample.jogl, and point the webcam to the marker. If a cube appears, the installation of NyARToolkit is done!
+	
+For detailed intruction of step 1 ~ step 4, please refer to  
+http://sixwish.jp/Nyartoolkit/ 
 
 
-## セットアップ方法
+## Project Outline
 
-Eclipse環境に、NyARToolkit開発環境をインストールする方法を説明します。
-
-
-1. Eclipseで空のワークスペースを作成します。
-2. lib,sample,utilsディレクトリをワークスペースにインポートします。
-3. インポートしたプロジェクトのエラーを修正します。多くの場合、エラーは文字コードの不一致と外部JARファイルの参照ミスです。  
-文字コードの不一致は、プロジェクトの文字コードをUTF8に変更することで解決します。
-外部JARファイルの参照ミスについては、外部ライブラリの章を参考にして下さい。
-4. Webカメラをコンピュータに接続してください。
-5. NyARToolkit.sample.joglの[WebcamCapture.java](https://github.com/nyatla/NyARToolkit/blob/master/sample/jogl/src/jp/nyatla/nyartoolkit/jogl/sample/sketch/webcamcapture/WebCamSample.java)を実行して、マーカを撮影します。立方体が現れれば、インストールは正しく完了しています。
-
-1-4の手順については、http://sixwish.jp/Nyartoolkit/ に詳しい解説があります。
-
-## プロジェクトの概要
-
-各Eclipseプロジェクトの概要です。
+The outline of the Eclipse project.
 
 * NyARToolkit  
-NyARToolkitライブラリの本体です。基本的はJ2MEのAPIが有れば動きます。  
-3つのソースフォルダがあります。srcには画像処理、数値計算クラス群があります。src.markersystemには、複数のマーカを簡単に扱う為のMarkerSystemがあります。src.rpfには、RealityPlatformを構成するクラス群があります。  
-依存する外部ライブラリはありません。
-
+The main body of NyARToolkit library. Basically it will work as normal as long as J2ME API is provided. There are three source folders,  
+	1. src contains image processing, and numerical calculation classes.
+	2. src.markersystem contains a MarkerSystem that is used to make the manipulation of multiple markers easier.
+	3. src.rpf contains classes that together form RealityPlatform system.  
+There is no external libraries required by this module.
 * NyARToolkit.sample.java3d  
-Java3dを出力先とするサンプルアプリケーションです。1個のサンプルプログラムがあります。  
-外部ライブラリは、Java3DとJMFに依存しています。
+Sample application that outputs Java3D formats. There is one sample program.
+It depends on two external libraries, Java3D and JMF.
 * NyARToolkit.sample.jogl  
-OpenGLでの代表的な利用方法を実装したサンプルです。そのまま動作するのは[WebcamCapture.java](https://github.com/nyatla/NyARToolkit/blob/master/sample/jogl/src/jp/nyatla/nyartoolkit/jogl/sample/sketch/webcamcapture/WebCamSample.java)だけです。
-他のサンプルはキャプチャライブラリにJMFを使っているため、JMFをセットアップするか、キャプチャ方式を書き換える必要があります。
-srcには、MarkerSystemを使ったサンプルがあります。OpenGLのスケッチを使ったサンプルと、使わないサンプルがあります。
-src.oldには、以前の古い形式のサンプルプログラムがあります。
-src.rpfには、RealityPlatformを使ったサンプルプログラムがあります。
-
+A sample that is packaged with some typical methods from OpenGL. There are various kinds of samples under src/sketch folder.
+	1. src contains sample applications that utilize MarkerSystem. It can further be grouped by those using OpenGL sketching and those not.
+	2. src.old includes sample applications of previous formats.
+	3. src.rpf includes sample applications that use RealtyPlatform.
 * NyARToolkit.sandbox  
-お砂場です。実験プログラムや作りかけのコードなどを埋蔵しています。  
-品質は未保証です（不具合等が多く放置されています）。testソースフォルダにあるサンプルプログラムは、RealityPlatformの試験に役立つかもしれません。
+It buries unverified or incomplete programs. There are many bugs so the quality is not assured. The sample programs under the test folder will probably be useful if you are to test RealityPlatform.
 * NyARToolkit.utils.j2se  
-JavaSEに依存したヘルパークラス群と、テストプログラムがあります。  
-BufferedImageをそのままNyARToolkitへ入力するためのクラスなどがあります。
+It contains helper classes and test programs that are dependent on JavaSE.  
+Classes in this module enable you to input BufferedImage directly into NyARToolkit.
 * NyARToolkit.utils.java3d  
-Java3Dに依存したヘルパークラス群と、テストプログラムがあります。  
-NyARToolkitの出力値のJava3dへの入力を支援します。
+It contains helper classes and test programs that are dependent on Java3D.  
+It provides NyARToolkit with the ability to output Java3D format.
 * NyARToolkit.utils.jogl  
-Joglに依存したヘルパークラス群と、テストプログラムがあります。Joglのドライバです。
+It contains helper classes and test programs that are dependent on Jogl.  
+It provides NyARToolkit with the ability to output Jogl format.
 * NyARToolkit.utils.qt  
-QTJavaに依存したヘルパークラス群と、テストプログラムがあります。  
-QuickTimeのドライバです。
-* NyARToolkit.utils.webcampapture
-Webcam Captureに関するファイルが有ります。
-
-
-
+It contains helper classes and test programs that are dependent on QTJava.  
+It supports image capturing function via QuickTime.
 
 ## License
-NyARToolkitは、商用ライセンスとLGPLv3のデュアルライセンスを採用しています。
+NyARToolkit adaptes a LGPLv3 dual license.
 
-LGPLv3を承諾された場合には、商用、非商用にかかわらず、無償でご利用になれます。
-LGPLv3を承諾できない場合には、商用ライセンスの購入をご検討ください。
+* GNU Lesser General Public License (LGPL) Ver.3 is intended for open source usage, where applications based on NyARToolkit should also 
+be distributed under the LGPL.
+* Commercial licensing is intended for non-LGPL useage, which means 
+applications based on NyARTookit can be distributed without LGPL. 
 
-* LGPLv3  
-LGPLv3については、COPYING.txtをお読みください。
-* 商用ライセンス  
-商用ライセンスについては、ARToolWorks社に管理を委託しております。http://www.artoolworks.com/Home.html
+If a LGPLv3 license is approved, it will be available to use free of charge, regardless of commercial or non-commercial purposes.
+If a LGPLv3 license is not approved, please consider purchasing the commercial license.
+
+Commercial License
+Please contact ARToolWorks Inc.
+http://www.artoolworks.com/Home.html
