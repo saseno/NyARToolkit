@@ -1,4 +1,4 @@
-
+[Japanese here!](README.ja.md "")
 
 # NyARToolkit for Java
 
